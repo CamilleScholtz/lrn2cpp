@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 #ifndef RATIONAL_HPP
 #define RATIONAL_HPP
@@ -68,6 +69,12 @@ public:
 			<< "["
 			<< rhs.counter
 			<< "/"
+			<< rhs.denominator
+			<< "]"
+			<< "["
+			<< "0x" << std::setfill('0') << std::setw(4) << std::hex << std::uppercase
+			<< rhs.counter
+			<< "/0x" << std::setfill('0') << std::setw(4)
 			<< rhs.denominator
 			<< "]";
 	}
