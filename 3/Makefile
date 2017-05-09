@@ -7,5 +7,5 @@ CFLAGS  += -Wall -Wextra -lstdc++ $(INCS)
 CPPLAGS += $(CFLAGS)
 LDFLAGS += $(LIBS)
 
-1: circle.* fill.*line.* rectangle.* street.* window.* main.cpp
+3: ball.* circle.* drawable.* line.* rectangle.* vector.* wall.* window.* main.cpp
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
