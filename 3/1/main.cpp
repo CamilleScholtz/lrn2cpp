@@ -17,7 +17,7 @@ int main() {
 		for(auto &p : objects) {
 			p->draw();
 		}
-		for( auto &p : objects ) {
+		for(auto &p : objects ) {
 			 p->update();
 		}
 		for(auto &p : objects) {

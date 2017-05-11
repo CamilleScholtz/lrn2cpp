@@ -9,7 +9,7 @@ static int drawy[65536];
 static int drawi = 0;
 
 void winloop() {
-	while (1) {
+	while (true) {
 		XNextEvent(dpy, &ev);
 
 		switch (ev.type) {
