@@ -16,7 +16,7 @@ var (
 	g = gpio.NewLedDriver(tty, "11")
 )
 
-func leftToRight() {
+func blink() {
 	var i int
 	gobot.Every(1*time.Second, func() {
 		r.Off()
@@ -40,30 +40,6 @@ func leftToRight() {
 	})
 }
 
-func fillUp() {
-	var i int
-	gobot.Every(1*time.Second, func() {
-		switch i {
-		case 0:
-			r.On()
-		case 1:
-			y.On()
-		case 2:
-			g.On()
-		}
-
-		if i > 2 {
-			i = 0
-
-			r.Off()
-			y.Off()
-			g.Off()
-		} else {
-			i++
-		}
-	})
-}
-
 func main() {
 	robot := gobot.NewRobot("bot",
 		[]gobot.Connection{tty},
@@ -72,7 +48,7 @@ func main() {
 		[]gobot.Device{y},
 		[]gobot.Device{g},
 
-		fillUp,
+		blink,
 	)
 
 	robot.Start()
