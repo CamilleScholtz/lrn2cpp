@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"time"
-
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/gpio"
 	"gobot.io/x/gobot/platforms/firmata"
@@ -15,55 +12,41 @@ var (
 	r = gpio.NewLedDriver(tty, "13")
 	y = gpio.NewLedDriver(tty, "12")
 	g = gpio.NewLedDriver(tty, "11")
+
+	bl = gpio.NewButtonDriver(tty, "10")
+	br = gpio.NewButtonDriver(tty, "9")
+
+	i int
 )
 
-func leftToRight() {
-	var i int
-	gobot.Every(1*time.Second, func() {
-		r.Off()
-		y.Off()
-		g.Off()
-
-		switch i {
-		case 0:
-			r.On()
-		case 1:
-			y.On()
-		case 2:
-			g.On()
-		}
-
-		if i > 1 {
-			i = 0
+func blink() {
+	bl.On(gpio.ButtonPush, func(data interface{}) {
+		if i < 0 {
+			i = 2
 		} else {
-			i++
+			i--
 		}
 	})
-}
-
-func fillUp() {
-	var i int
-	gobot.Every(1*time.Second, func() {
-		switch i {
-		case 0:
-			r.On()
-		case 1:
-			y.On()
-		case 2:
-			g.On()
-		}
-
+	br.On(gpio.ButtonPush, func(data interface{}) {
 		if i > 2 {
 			i = 0
-
-			r.Off()
-			y.Off()
-			g.Off()
 		} else {
 			i++
 		}
-		fmt.Printf("%d\n", i)
 	})
+
+	r.Off()
+	y.Off()
+	g.Off()
+
+	switch i {
+	case 0:
+		r.On()
+	case 1:
+		y.On()
+	case 2:
+		g.On()
+	}
 }
 
 func main() {
@@ -74,7 +57,7 @@ func main() {
 		[]gobot.Device{y},
 		[]gobot.Device{g},
 
-		fillUp,
+		blink,
 	)
 
 	robot.Start()
