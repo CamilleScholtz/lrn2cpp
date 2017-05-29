@@ -8,7 +8,7 @@ wall::wall(window& w, const vector &start, const vector &end, const int &interva
 {}
 
 void wall::draw() {
-	if(fill == true) {
+	if (fill) {
 		for (int y=start.y; y < end.y; y++) {
 			for (int x=start.x; x < end.x; x++) {
 				w.draw(vector(x, y));
@@ -22,9 +22,9 @@ void wall::draw() {
 void wall::update() {
 	count++;
 	if ((count % interval) == 0){
-		if (fill == true){
+		if (fill) {
 			fill = false;
-		} else if (fill == false) {
+		} else {
 			fill = true;
 		}
 	}
