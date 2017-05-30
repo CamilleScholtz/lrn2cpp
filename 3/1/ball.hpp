@@ -4,7 +4,13 @@
 #include "window.hpp"
 #include "vector.hpp"
 #include "circle.hpp"
+// @file
 
+/// \brief
+/// ball
+/// \details
+/// A circle, this circle has a speed so it can move and it will bounce
+/// off (interact) with walls.
 class ball : public circle {
 private:
    vector speed;
